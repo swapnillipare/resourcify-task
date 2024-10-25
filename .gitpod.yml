@@ -1,0 +1,18 @@
+
+tasks:
+  - name: yarn install
+    init: yarn install
+  - name: start db # runs during prebuild
+    command: docker-compose up -d
+
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 4200
+    onOpen: open-preview
+
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+    - redhat.vscode-commons
+    - richardwillis.vscode-gradle
