@@ -59,7 +59,7 @@ public class DefaultTaskService implements TaskService {
   @Override
   public List<TaskResponse> findAllByOrderByDueDateAsc() {
     log.debug("findAllByOrderByDueDateAsc()");
-    return taskRepository.findAllByOrderByDueDateAsc().stream().map(this::transformToResponse).collect(toList());
+    return taskRepository.findAllByOrderByDueDateAscDueDateIsNull().stream().map(this::transformToResponse).collect(toList());
   }
 
   private Task getTaskOrThrowException(String taskId) {
