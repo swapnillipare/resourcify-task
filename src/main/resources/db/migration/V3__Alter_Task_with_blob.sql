@@ -1,0 +1,8 @@
+ALTER TABLE task
+ADD COLUMN file_data BLOB;
+
+ALTER TABLE task
+ADD COLUMN file_name VARCHAR(255);
+
+ALTER TABLE task
+ADD COLUMN file_type VARCHAR(50);

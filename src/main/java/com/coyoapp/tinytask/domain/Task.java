@@ -1,17 +1,14 @@
 package com.coyoapp.tinytask.domain;
 
-import java.time.Instant;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Table(name = "task")
 @Entity
@@ -30,4 +27,21 @@ public class Task {
 
   @CreatedDate
   private Instant created;
+
+  // task due date
+  @Column(name = "due_date")
+  private LocalDateTime dueDate;
+
+  // file content in binary format
+  @Lob
+  @Column(name = "file_data")
+  private byte[] fileData;
+
+  // file name for reference
+  @Column(name = "file_name")
+  private String fileName;
+
+  // file type (e.g., application/pdf, image/png)
+  @Column(name = "file_type")
+  private String fileType;
 }

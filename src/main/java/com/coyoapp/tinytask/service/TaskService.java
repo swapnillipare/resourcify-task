@@ -12,4 +12,5 @@ public interface TaskService {
 
   void deleteTask(String taskId);
 
+  List<TaskResponse> findAllByOrderByDueDateAsc(); // Sort by due date
 }

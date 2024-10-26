@@ -35,7 +35,7 @@ class TaskController {
   @GetMapping
   public List<TaskResponse> getTasks() {
     log.debug("getTasks()");
-    return taskService.getTasks();
+    return taskService.findAllByOrderByDueDateAsc();
   }
 
   @ResponseStatus(HttpStatus.OK)
