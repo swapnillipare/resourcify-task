@@ -1,6 +1,35 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <input type="text" formControlName="name" matInput placeholder="Add a new tiny task…" data-cy="task-input">
-    <mat-icon matSuffix aria-label="Add task"(click)="onSubmit()">send</mat-icon>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+  <!-- Column 1: Task Name Input -->
+  <mat-form-field class="task-input-field">
+    <input
+      type="text"
+      formControlName="name"
+      matInput
+      placeholder="Add a new tiny task…"
+      data-cy="task-input"
+    />
   </mat-form-field>
+
+  <!-- Column 2: Due Date Picker -->
+  <mat-form-field class="task-date-field">
+    <input
+      matInput
+      [matDatepicker]="picker"
+      formControlName="dueDate"
+      placeholder="Choose a due date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Column 3: Submit Icon -->
+  <div class="submit-icon-wrapper">
+    <mat-icon
+      matSuffix
+      aria-label="Add task"
+      class="submit-icon"
+      (click)="onSubmit()"
+      >send</mat-icon
+    >
+  </div>
 </form>

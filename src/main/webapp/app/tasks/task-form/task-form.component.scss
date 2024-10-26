@@ -5,7 +5,7 @@ form {
 }
 
 .mat-form-field {
-  flex: 1;
+  flex: 4;
 }
 
 .mat-datepicker-toggle {
@@ -14,4 +14,29 @@ form {
 
 .mat-icon {
   cursor: pointer;
+}
+
+.task-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto; /* 3 columns: 2 equal, last auto */
+  gap: 10px; /* Space between columns */
+  align-items: center;
+  width: 100%;
+}
+
+.task-input-field,
+.task-date-field {
+  width: 100%; /* Ensures inputs fill column space */
+}
+
+.submit-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-icon {
+  cursor: pointer;
+  color: #3f51b5; /* Adjust icon color */
+  font-size: 24px; /* Adjust icon size */
 }
