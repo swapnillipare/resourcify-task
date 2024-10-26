@@ -12,32 +12,18 @@
 
   <!-- Column 2: Due Date Picker -->
   <mat-form-field class="task-date-field">
-    <input
-      matInput
-      [matDatepicker]="picker"
-      formControlName="dueDate"
-      placeholder="Choose a due date"
-    />
+    <input matInput [matDatepicker]="picker" formControlName="dueDate" placeholder="Choose a due date" />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <!-- Column 3: File Input -->
-  <input
-    type="file"
-    (change)="onFileSelected($event)"
-    placeholder="Choose a file"
-    class="file-input"
-  />
+  <input #fileInput type="file" (change)="onFileSelected($event)" placeholder="Choose a file" class="file-input" />
 
   <!-- Column 4: Submit Icon -->
   <div class="submit-icon-wrapper">
-    <mat-icon
-      matSuffix
-      aria-label="Add task"
-      class="submit-icon"
-      (click)="onSubmit()"
-      >send</mat-icon
-    >
+    <button mat-icon-button color="white" (click)="onSubmit()">
+      <mat-icon aria-label="Add task">send</mat-icon>
+    </button>
   </div>
 </form>

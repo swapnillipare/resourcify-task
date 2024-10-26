@@ -1,42 +1,51 @@
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.mat-form-field {
-  flex: 4;
-}
-
-.mat-datepicker-toggle {
-  color: white;
-}
-
-.mat-icon {
-  cursor: pointer;
-}
-
+/* task-form.component.scss */
 .task-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto; /* 3 columns: 2 equal, last auto */
-  gap: 10px; /* Space between columns */
-  align-items: center;
-  width: 100%;
-}
-
-.task-input-field,
-.task-date-field {
-  width: 100%; /* Ensures inputs fill column space */
-}
-
-.submit-icon-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
+  gap: 16px; /* Space between columns */
+  flex-wrap: wrap;
 
-.submit-icon {
-  cursor: pointer;
-  color: white; /* Adjust icon color */
-  font-size: 24px; /* Adjust icon size */
+  /* Column styles */
+  .task-input-field,
+  .task-date-field,
+  .file-input,
+  .submit-icon-wrapper {
+    flex: 1 1 22%; /* Set each item to roughly 1/4 width */
+  }
+
+  /* File input styling */
+  .file-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  /* Submit icon styling */
+  .submit-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mat-datepicker-toggle {
+    color: white;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .task-input-field,
+    .task-date-field,
+    .file-input,
+    .submit-icon-wrapper {
+      flex: 1 1 48%; /* Two columns on smaller screens */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .task-input-field,
+    .task-date-field,
+    .file-input,
+    .submit-icon-wrapper {
+      flex: 1 1 100%; /* Single column on extra-small screens */
+    }
+  }
 }
