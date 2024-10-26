@@ -19,9 +19,12 @@ export interface TaskService {
    *
    * @param name the task's name
    * @param dueDate the task's Due Date 
+   * @param fileData the task's file content with base64
+   * @param fileName the task's file name 
+   * @param fileType the task's file type
    * @returns an `Observable` holding the created task
    */
-  create(name: string, dueDate: string): Observable<Task>;
+  create(name: string, dueDate: string, fileData:string, fileName:string, fileType:string): Observable<Task>;
 
   /**
    * Removes the task with the given ID from the list of tasks.

@@ -3,6 +3,16 @@
     <mat-icon mat-list-icon>assignment</mat-icon>
     <h4 mat-line>{{task.name}}</h4>
     <h4 mat-line>{{ task.dueDate | date: 'yyyy-MM-dd' }}</h4>
+   
+    <!-- Download Link for the File -->
+    <a
+      *ngIf="task.fileData"
+      [href]="'data:' + task.fileType + ';base64,' + task.fileData"
+      [download]="task.fileName"
+      class="download-link"
+    >
+       {{ task.fileName }}
+    </a>
     <button mat-icon-button aria-label="Delete task" color="primary">
       <mat-icon aria-label="Delete task" (click)="delete(task)">delete</mat-icon>
     </button>

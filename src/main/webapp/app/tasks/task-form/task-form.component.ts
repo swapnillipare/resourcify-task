@@ -22,8 +22,29 @@ export class TaskFormComponent {
     name: new FormControl('', Validators.required),
     dueDate: new FormControl(null)
   });
+  fileData: string | null = null;
+  fileName: string | null = null;
+  fileType: string | null = null;
 
   constructor(@Inject('TaskService') private taskService: TaskService,private datePipe: DatePipe) { }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+     
+      this.fileName = file.name; // Capture file name
+      this.fileType = file.type; // Capture file type
+      
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        this.fileData = result.split(',')[1]; // Remove the `data:*/*;base64,` prefix
+      };
+
+      reader.readAsDataURL(file); // Read file as DataURL (base64)
+    }
+  }
 
   onSubmit(): void {
     const formValue = this.taskForm.value;
@@ -31,9 +52,13 @@ export class TaskFormComponent {
 
     const taskData = {
       name: formValue.name,
-      dueDate: formattedDueDate // Send the formatted date
+      dueDate: formattedDueDate, // Send the formatted date
+      fileData: this.fileData, // Send base64 encoded file with the form data
+      fileName: this.fileName,     // Send file name
+      fileType: this.fileType      // Send file type
     };
-    this.taskService.create(taskData.name,taskData.dueDate).subscribe(task => {
+   
+    this.taskService.create(taskData.name,taskData.dueDate, taskData.fileData, taskData.fileName, taskData.fileType).subscribe(task => {
       this.created.emit(task);
       this.taskForm.reset();
     });

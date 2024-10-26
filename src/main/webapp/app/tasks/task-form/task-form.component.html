@@ -22,7 +22,15 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <!-- Column 3: Submit Icon -->
+  <!-- Column 3: File Input -->
+  <input
+    type="file"
+    (change)="onFileSelected($event)"
+    placeholder="Choose a file"
+    class="file-input"
+  />
+
+  <!-- Column 4: Submit Icon -->
   <div class="submit-icon-wrapper">
     <mat-icon
       matSuffix
