@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Inject, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Task } from '../task';
@@ -18,6 +18,10 @@ export class TaskFormComponent {
 
   @Output() created: EventEmitter<Task> = new EventEmitter();
 
+   // Define ViewChild for the file input
+   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef<HTMLInputElement>; // Ensure proper type
+
+   
   taskForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     dueDate: new FormControl(null)
@@ -26,16 +30,16 @@ export class TaskFormComponent {
   fileName: string | null = null;
   fileType: string | null = null;
 
-  constructor(@Inject('TaskService') private taskService: TaskService,private datePipe: DatePipe) { }
+  constructor(@Inject('TaskService') private taskService: TaskService, private datePipe: DatePipe) { }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-     
+
       this.fileName = file.name; // Capture file name
       this.fileType = file.type; // Capture file type
-      
+
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
@@ -57,17 +61,26 @@ export class TaskFormComponent {
       fileName: this.fileName,     // Send file name
       fileType: this.fileType      // Send file type
     };
-   
+
     this.taskService.create(taskData.name, taskData.dueDate, taskData.fileData, taskData.fileName, taskData.fileType)
-    .subscribe({
-      next: (task) => {
-        this.created.emit(task);
-        this.taskForm.reset();
-      },
-      error: (err) => {
-        console.error('Error while saving task:', err);
-        //TODO: show a message to the user
-      }
-    });
+      .subscribe({
+        next: (task) => {
+          this.created.emit(task);
+          this.taskForm.reset();
+          this.fileData = null;
+          this.fileName = null;
+          this.fileType = null;
+          this.clearFileInput();
+        },
+        error: (err) => {
+          console.error('Error while saving task:', err);
+          //TODO: show a message to the user
+        }
+      });
+  }
+  clearFileInput(): void {
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = ''; // Clear the file input
+    }
   }
 }
