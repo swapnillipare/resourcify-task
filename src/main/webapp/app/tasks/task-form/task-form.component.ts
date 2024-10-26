@@ -58,9 +58,16 @@ export class TaskFormComponent {
       fileType: this.fileType      // Send file type
     };
    
-    this.taskService.create(taskData.name,taskData.dueDate, taskData.fileData, taskData.fileName, taskData.fileType).subscribe(task => {
-      this.created.emit(task);
-      this.taskForm.reset();
+    this.taskService.create(taskData.name, taskData.dueDate, taskData.fileData, taskData.fileName, taskData.fileType)
+    .subscribe({
+      next: (task) => {
+        this.created.emit(task);
+        this.taskForm.reset();
+      },
+      error: (err) => {
+        console.error('Error while saving task:', err);
+        //TODO: show a message to the user
+      }
     });
   }
 }

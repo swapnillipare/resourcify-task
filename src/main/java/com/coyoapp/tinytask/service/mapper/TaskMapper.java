@@ -29,7 +29,6 @@ public class TaskMapper {
       .id(task.getId())
       .name(task.getName())
       .dueDate(task.getDueDate())
-      .fileData(task.getFileData() != null ? Base64.getEncoder().encodeToString(task.getFileData()) : null)
       .fileName(task.getFileName())
       .fileType(task.getFileType())
       .build();

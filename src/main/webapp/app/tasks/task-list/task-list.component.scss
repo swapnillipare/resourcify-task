@@ -11,4 +11,40 @@
   button .mat-icon {
     color: #2C3645;
   }
+
+  /* Style for the entire list item */
+  .task-list-item {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Style for image preview */
+  .task-image-preview {
+    margin-right: 12px;
+    /* Space between image and next element */
+  }
+
+  /* Style for download link with icon */
+  .download-link {
+    margin-right: 12px; /* Space between download link and delete button */
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+
+  /* Space out delete button from other elements */
+  .delete-button {
+    margin-left: auto;
+    /* Pushes the delete button to the far right */
+  }
+
+  /* Custom tooltip styles */
+  .custom-tooltip {
+    font-size: 14px; /* Adjust size as needed */
+    background-color: rgba(0, 0, 0, 0.75); /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 1000; /* Make sure it's on top */
+  }
 }

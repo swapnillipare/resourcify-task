@@ -40,4 +40,13 @@ export class LocalTaskService implements TaskService {
   private writeTasks(tasks: Task[]): void {
     localStorage.setItem(LocalTaskService.STORAGE_KEY, JSON.stringify(tasks));
   }
+
+  downloadFile(taskId: string) {
+    throw new Error('Method not implemented.');
+  }
+
+  generatePreviewUrl(taskId: string) {
+    throw new Error('Method not implemented.');
+  }
+ 
 }

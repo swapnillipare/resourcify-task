@@ -33,4 +33,16 @@ export interface TaskService {
    * @returns an empty `Observable`
    */
   delete(id: string): Observable<void>;
+
+  /**
+   * 
+   * @param taskId 
+   */
+  downloadFile(taskId: string);
+
+  /**
+   * 
+   * @param taskId 
+   */
+  generatePreviewUrl(taskId: string);
 }

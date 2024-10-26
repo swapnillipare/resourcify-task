@@ -1,19 +1,34 @@
 <mat-list data-cy="task-list">
-  <mat-list-item *ngFor="let task of tasks" class="mat-elevation-z1">
+  <mat-list-item *ngFor="let task of tasks" class="mat-elevation-z1 task-list-item">
     <mat-icon mat-list-icon>assignment</mat-icon>
-    <h4 mat-line>{{task.name}}</h4>
+    
+    <!-- Task Name -->
+    <h4 mat-line>{{ task.name }}</h4>
+    
+    <!-- Due Date -->
     <h4 mat-line>{{ task.dueDate | date: 'yyyy-MM-dd' }}</h4>
-   
-    <!-- Download Link for the File -->
-    <a
-      *ngIf="task.fileData"
-      [href]="'data:' + task.fileType + ';base64,' + task.fileData"
-      [download]="task.fileName"
-      class="download-link"
-    >
-       {{ task.fileName }}
-    </a>
-    <button mat-icon-button aria-label="Delete task" color="primary">
+
+    <!-- Display Image Preview if the file is an image -->
+    <ng-container *ngIf="task.fileType && task.fileType.startsWith('image/')">
+      <img [src]="'http://localhost:8080/tasks/files/stream/' + task.id" alt="{{ task.fileName }}" width="80" height="50" class="task-image-preview">
+    </ng-container>
+
+    <!-- Download Icon with Tooltip -->
+    <ng-container *ngIf="task.fileName">
+      <a 
+        (click)="onDownload(task.id)" 
+        class="download-link"
+        matTooltip="{{ task.fileName }}" 
+        matTooltipPosition="above" 
+        matTooltipClass="custom-tooltip"
+        matTooltipHideDelay="0"
+        matTooltipShowDelay="0">
+        <mat-icon aria-label="Download file" class="download-icon">cloud_download</mat-icon>
+      </a>
+    </ng-container>
+
+    <!-- Delete Task Button -->
+    <button mat-icon-button aria-label="Delete task" color="primary" class="delete-button">
       <mat-icon aria-label="Delete task" (click)="delete(task)">delete</mat-icon>
     </button>
   </mat-list-item>

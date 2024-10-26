@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip'; // Import MatTooltipModule
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,6 +22,7 @@ import { TasksModule } from './tasks/tasks.module';
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
+    MatTooltipModule,
     MatIconModule,
     MatToolbarModule,
     TasksModule,
