@@ -9,6 +9,8 @@ import com.coyoapp.tinytask.service.mapper.TaskMapper;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -60,6 +62,11 @@ public class DefaultTaskService implements TaskService {
   public List<TaskResponse> findAllByOrderByDueDateAsc() {
     log.debug("findAllByOrderByDueDateAsc()");
     return taskRepository.findAllByOrderByDueDateAscDueDateIsNull().stream().map(this::transformToResponse).collect(toList());
+  }
+
+  @Override
+  public Optional<Task> findById(String taskId) {
+    return taskRepository.findById(taskId);
   }
 
   private Task getTaskOrThrowException(String taskId) {
